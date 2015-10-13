@@ -2,6 +2,7 @@ import java.lang.Exception;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.lang.Thread;
 
@@ -43,8 +44,9 @@ public class Client implements Runnable {
     }
     
     private void process(String request, OutputStream os) throws IOException {
-        System.out.println(request);
-        System.out.println("---------------------------------------------");
+        //System.out.println(request);
+        //System.out.println("---------------------------------------------");
+        //System.out.println("New request created. Time:" + new Date().toString());
 
         int idx = request.indexOf("\r\n");
         request = request.substring(0, idx);
@@ -56,6 +58,11 @@ public class Client implements Runnable {
         }
 
         String method = parts[0], url = parts[1], version = parts[2];
+
+        if (url.contains("favicon.ico")) {
+            returnStatusCode(400, os);
+            return;
+        }
         
         if (( ! version.equalsIgnoreCase("HTTP/1.0")) && ( ! version.equalsIgnoreCase("HTTP/1.1"))) {
             returnStatusCode(400, os);
@@ -127,7 +134,7 @@ public class Client implements Runnable {
                 socket.close();
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
             return;
         }
     }

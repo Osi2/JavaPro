@@ -17,7 +17,7 @@ public class ListenThread extends Thread {
             ServerSocket srv = new ServerSocket(port);
             ExecutorService pool = Executors.newFixedThreadPool(4);
             try {
-                while ( ! isInterrupted()) {
+                while (!isInterrupted()) {
                     Socket socket = srv.accept();
 
                     Client client = new Client(socket, path);
@@ -30,7 +30,7 @@ public class ListenThread extends Thread {
                 pool.shutdown();
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
             return;
         }
     }
