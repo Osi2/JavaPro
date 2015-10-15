@@ -1,6 +1,4 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,28 +6,20 @@ import java.util.List;
  * Created by Yegor2 on 10/14/2015.
  */
 public class ChunkEncodingTest {
-    private static String file = "C:\\Users\\Yegor2\\IdeaProjects\\JavaPro\\Lab 2.2\\src\\test.txt";
+    private static String fileIn = "C:\\Users\\Yegor2\\IdeaProjects\\JavaPro\\Lab 2.2\\src\\InputFile.txt";
+    private static String fileOut = "C:\\Users\\Yegor2\\IdeaProjects\\JavaPro\\Lab 2.2\\src\\OutputFile.txt";
 
-    public static void main(String[] args) throws FileNotFoundException,IOException {
+    public static void main(String[] args) throws IOException {
 
-        List<String> headers = new ArrayList<String>();
-        FileInputStream fis = new FileInputStream(file);
+        ChunkEncoderInputStream is = new ChunkEncoderInputStream(new FileInputStream(fileIn), 10);
+        ChunkDecoderOutputStream os = new ChunkDecoderOutputStream(new FileOutputStream(fileOut));
 
-        byte[] data = new byte[fis.available()];
-        fis.read(data);
-
-        ChunkEncoderOutputStream os = new ChunkEncoderOutputStream(data,headers);
-        ChunkDecoderInputStream is = new ChunkDecoderInputStream();
-        os.setChunkSize(10);
-        is.setChunkSize(10);
-
-        while (!os.IsEmpty()){
-            byte[] encodedChunk = os.encodeNextPortion();
+        while (!is.IsEmpty()){
+            byte[] encodedChunk = is.encodeNextPortion();
             String encodedString = new String(encodedChunk,"UTF-8");
-
-            System.out.println("encoded string: [" + encodedString + "]");
-            String decodedChunk = is.decodeData(encodedChunk);
-
+            System.out.println("encoded string: " + encodedString);
+            System.out.println("encoded string: [" + encodedString.replaceAll("\r","\\\\r").replaceAll("\n","\\\\n") + "]");
+            os.write(encodedChunk);
         }
 
 

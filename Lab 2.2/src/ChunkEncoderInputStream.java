@@ -1,37 +1,44 @@
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
 /**
  * Created by Yegor2 on 10/14/2015.
  */
-public class ChunkEncoderOutputStream extends OutputStream{
+public class ChunkEncoderInputStream extends InputStream{
 
     private ByteArrayOutputStream os = new ByteArrayOutputStream();
+    private InputStream is = null;
     private byte[] data;
     private List<String> headers;
     private int chunkSize;
     private int counter = 0;
     private int offset = 0;
+    private boolean isEmpty = false;
 
-
-    public ChunkEncoderOutputStream(byte[] data, List<String> headers){
-        this.data = data;
-        this.headers = headers;
+    public int read() throws IOException{
+        if (is.available() < 0){
+            return -1;
+        }
+        return is.read();
     }
 
-    public void write(int a){
-            encodeData();
+
+    public ChunkEncoderInputStream(InputStream is, int chunkSize)throws IOException{
+        this.is = is;
+        this.chunkSize = chunkSize;
+        this.data = new byte[is.available()];
+        is.read(data);
     }
 
     public byte[] encodeNextPortion(){
         return encodeData();
     }
 
-
     public boolean IsEmpty(){
-        return (offset >= data.length);
+        return isEmpty;
     }
 
     private byte[] encodeData(){
@@ -42,7 +49,7 @@ public class ChunkEncoderOutputStream extends OutputStream{
             int tail = data.length % chunkSize; // length of remainer part
             //int offset = 0;
             String head = Integer.toHexString(chunkSize) + "\r\n"; // first string with chunk size in hex
-            os.flush();
+            os.reset();
 
             for (int i = counter; i < n; i++) { // write array of chunks
                 os.write(head.getBytes());
@@ -61,7 +68,9 @@ public class ChunkEncoderOutputStream extends OutputStream{
 
             os.write("0\r\n\r\n".getBytes());
 
-            headers.add("Transfer-Encoding: chunked\r\n");
+            isEmpty = true;
+
+            //headers.add("Transfer-Encoding: chunked\r\n");
 
             return os.toByteArray();
         }catch (IOException ex){
