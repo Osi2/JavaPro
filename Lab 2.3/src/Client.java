@@ -2,13 +2,13 @@ import java.lang.Exception;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.lang.Thread;
+import java.util.StringTokenizer;
 
 public class Client implements Runnable {
     private Socket socket;
     private FileManager fm;
+    private BufferedReader inClient;
     
     public Client(Socket socket, String path) {
         this.socket = socket;
@@ -42,6 +42,42 @@ public class Client implements Runnable {
             
         return res.toString().getBytes();
     }
+
+    private void process2(InputStream is, OutputStream os) throws IOException {
+        inClient = new BufferedReader(new InputStreamReader(is));
+        String currentLine = inClient.readLine();
+        StringTokenizer tokenizer = new StringTokenizer(currentLine);
+        String httpMethod = tokenizer.nextToken();
+        String httpQueryString = tokenizer.nextToken();
+        String responseString = null;
+
+        System.out.println("ProcessFile method: " + httpMethod);
+        System.out.println("ProcessFile queryString: " + httpQueryString);
+        System.out.println("Current line: " + currentLine);
+
+        if (httpMethod.equals("GET")) {
+            System.out.println("GET request");
+            if (httpQueryString.equals("/")) {
+                // The default home page
+                responseString =
+                        "<form action=\"http://127.0.0.1:5000\" enctype=\"multipart/form-data\"" +
+                                "method=\"post\">" +
+                                "Enter the name of the File <input name=\"file\" type=\"file\"><br>" +
+                                "<input value=\"Upload\" type=\"submit\"></form>" +
+                                "Upload only text files.";
+            } else {
+                responseString = "<b>The Requested resource not found ...." +
+                        "Usage: http://127.0.0.1:5000</b>";
+            }
+            os.write(responseString.getBytes());
+            returnStatusCode(200, os);
+
+        }
+        else if(httpMethod.equals("POST")){
+            System.out.println("POST request");
+
+        }
+    }
     
     private void process(String request, OutputStream os) throws IOException {
         //System.out.println(request);
@@ -64,6 +100,9 @@ public class Client implements Runnable {
             System.out.println("              RECEIVED POST REQUEST");
             System.out.println("url: " + url);
             System.out.println("version: " + version);
+            InputStream is = socket.getInputStream();
+
+            int size = is.available();
             System.out.println("------------------------------------------------");
         }
 
@@ -115,32 +154,9 @@ public class Client implements Runnable {
             InputStream is = socket.getInputStream();
             OutputStream os = socket.getOutputStream();
 
-            ByteArrayOutputStream bs = new ByteArrayOutputStream();
-            byte[] buf, temp;
-            int len, b;
+            process2(is,os);
 
-            try {
-                do {
-                    len = is.available();
-                    buf = new byte[len];
 
-                    if (is.read(buf) > 0)
-                        bs.write(buf);
-
-                    temp = bs.toByteArray();
-
-                    for (int i = 0; i < temp.length - 3; i++) {
-                        if ((temp[i] == (byte)13) && (temp[i + 1] == (byte)10) &&
-                            (temp[i + 2] == (byte)13) && (temp[i + 3] == (byte)10))
-                        {
-                            String request = new String(temp, 0, i);
-                            process(request, os);
-                        }
-                    }
-                } while ( ! Thread.currentThread().isInterrupted());
-            } finally {
-                socket.close();
-            }
         } catch (Exception ex) {
             //ex.printStackTrace();
             return;
