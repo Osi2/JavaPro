@@ -1,6 +1,4 @@
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -8,12 +6,16 @@ import java.util.List;
  */
 public class ChunkEncoderOutputStream extends OutputStream{
 
-    private ByteArrayOutputStream os = new ByteArrayOutputStream();
+    private DataOutputStream dos = null;
     private byte[] data;
     private List<String> headers;
     private int chunkSize;
     private int counter = 0;
     private int offset = 0;
+
+    public ChunkEncoderOutputStream(OutputStream os){
+        dos = new DataOutputStream(os);
+    }
 
 
     public ChunkEncoderOutputStream(byte[] data, List<String> headers){
@@ -22,11 +24,7 @@ public class ChunkEncoderOutputStream extends OutputStream{
     }
 
     public void write(int a){
-            encodeData();
-    }
 
-    public byte[] encodeNextPortion(){
-        return encodeData();
     }
 
 
@@ -34,7 +32,7 @@ public class ChunkEncoderOutputStream extends OutputStream{
         return (offset >= data.length);
     }
 
-    private byte[] encodeData(){
+    public void encodeNextChunk(){
 
         try {
 
@@ -42,31 +40,29 @@ public class ChunkEncoderOutputStream extends OutputStream{
             int tail = data.length % chunkSize; // length of remainer part
             //int offset = 0;
             String head = Integer.toHexString(chunkSize) + "\r\n"; // first string with chunk size in hex
-            os.flush();
+            dos.flush();
 
             for (int i = counter; i < n; i++) { // write array of chunks
-                os.write(head.getBytes());
-                os.write(data, offset, chunkSize);
-                os.write("\r\n".getBytes());
+                dos.write(head.getBytes());
+                dos.write(data, offset, chunkSize);
+                dos.write("\r\n".getBytes());
                 offset += chunkSize;
                 counter++;
-                return os.toByteArray();
+                return;
             }
             if (tail > 0) { // write tail part
                 head = Integer.toHexString(tail) + "\r\n";
-                os.write(head.getBytes());
-                os.write(data, offset, tail);
-                os.write("\r\n".getBytes());
+                dos.write(head.getBytes());
+                dos.write(data, offset, tail);
+                dos.write("\r\n".getBytes());
             }
 
-            os.write("0\r\n\r\n".getBytes());
+            dos.write("0\r\n\r\n".getBytes());
 
             headers.add("Transfer-Encoding: chunked\r\n");
 
-            return os.toByteArray();
         }catch (IOException ex){
             ex.printStackTrace();
-            return null;
         }
 
     }
