@@ -1,0 +1,6 @@
+some text goes here
+param-pam-pam
+bla-bla-bla
+end of file
+close
+0
