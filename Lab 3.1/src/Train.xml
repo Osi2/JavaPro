@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <trains>
-<train id=1>
+<train id='1'>
 <from>Kyiv</from> 
 <to>Donetsk</to>
 <date>19.12.2013</date>
 <departure>15:05</departure>
 </train>
-<train id=2>
+<train id='2'>
 <from>Lviv</from> 
 <to>Donetsk</to>
 <date>19.12.2013</date>
 <departure>19:05</departure>
+</train>
+<train id='3'>
+<from>Kiev</from> 
+<to>San-Francisco</to>
+<date>19.12.2013</date>
+<departure>15:55</departure>
+</train>
+<train id='4'>
+<from>Kiev</from> 
+<to>Kharkiv</to>
+<date>19.12.2013</date>
+<departure>16:05</departure>
 </train>
 </trains>
