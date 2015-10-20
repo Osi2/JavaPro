@@ -1,0 +1,3 @@
+Train ¹ 1 Kyiv - Donetsk (dep. time 15:05) departures from 15:00 till 19:00
+Train ¹ 3 Kiev - San-Francisco (dep. time 15:55) departures from 15:00 till 19:00
+Train ¹ 4 Kiev - Kharkiv (dep. time 16:05) departures from 15:00 till 19:00
