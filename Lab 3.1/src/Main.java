@@ -14,19 +14,19 @@ public class Main {
     public static void main(String[] args) throws JAXBException,ParseException{
 
         File file = new File("D:\\Projects\\JavaPro\\Lab 3.1\\src\\Train.xml");
-        TrainSchedule trainSchedule = new TrainSchedule();
 
         JAXBContext jaxbContext = JAXBContext.newInstance(TrainSchedule.class);
-        //Marshaller marshaller = jaxbContext.createMarshaller();
 
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        trainSchedule = (TrainSchedule)unmarshaller.unmarshal(file);
+        TrainSchedule trainSchedule = (TrainSchedule)unmarshaller.unmarshal(file);
 
         Date dateFrom = new SimpleDateFormat("dd.MM.yyyy HH:mm").parse("19.12.2013 15:00");
         Date dateTo = new SimpleDateFormat("dd.MM.yyyy HH:mm").parse("19.12.2013 19:00");
 
         for (Train train:trainSchedule.getTrains()){
+
             Date date = new SimpleDateFormat("dd.MM.yyyy HH:mm").parse(train.getDate() + " " + train.getTime());
+
             if (date.after(dateFrom) && date.before(dateTo)){
                 System.out.println(train.toString() + " departures from 15:00 till 19:00");
             }
