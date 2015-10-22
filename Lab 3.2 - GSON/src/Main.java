@@ -10,7 +10,7 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException{
 
-        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Yegor2\\IdeaProjects\\JavaPro\\Lab 3.2\\src\\InputData.json"));
+        BufferedReader reader = new BufferedReader(new FileReader("D:\\_Projects\\JavaPro\\Lab 3.2\\src\\InputData.json"));
         StringBuilder sb = new StringBuilder();
         String s  = null;
 

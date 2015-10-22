@@ -13,7 +13,7 @@ import java.util.Date;
 public class Main {
     public static void main(String[] args) throws JAXBException,ParseException{
 
-        File file = new File("C:\\Users\\Yegor2\\IdeaProjects\\JavaPro\\Lab 3.1\\src\\Train.xml");
+        File file = new File("D:\\_Projects\\JavaPro\\Lab 3.1\\src\\Train.xml");
 
         JAXBContext jaxbContext = JAXBContext.newInstance(TrainSchedule.class);
 

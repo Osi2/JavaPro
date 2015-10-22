@@ -11,7 +11,7 @@ public class MyClass {
 
 	public static void main(String[] args) {
 		try {
-			File xmlFile = new File("C:\\Users\\Yegor2\\IdeaProjects\\JavaPro\\Lab 3.1\\src\\1.xml");
+			File xmlFile = new File("D:\\_Projects\\JavaPro\\Lab 3.1\\src\\1.xml");
 
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
