@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.codec.binary.*;
+//import org.apache.commons.codec.binary.*;
 
 public class Client implements Runnable {
     private Socket socket;
@@ -197,7 +197,7 @@ public class Client implements Runnable {
 
                 fout = new PrintWriter(dirname + "\\" + filename);
                 fs = new  FileOutputStream(dirname + "\\" + filename);
-                Base64OutputStream bs64Out = new Base64OutputStream(new FileOutputStream(dirname + "\\" + filename));
+                //Base64OutputStream bs64Out = new Base64OutputStream(new FileOutputStream(dirname + "\\" + filename));
 
                 String prevLine = inClient.readLine();
                 currentLine = inClient.readLine();
@@ -208,19 +208,19 @@ public class Client implements Runnable {
                     if (currentLine.indexOf("--" + boundary) != -1) {
                         //fout.print(prevLine);
                         //fs.write(prevLine.getBytes());
-                        bs64Out.write(prevLine.getBytes());
+                        //bs64Out.write(prevLine.getBytes());
                         break;
                     }
                     else {
                         //fs.write(prevLine.getBytes());
-                        bs64Out.write(prevLine.getBytes());
+                        //bs64Out.write(prevLine.getBytes());
                         //fout.println(prevLine.getBytes());
                     }
                     prevLine = currentLine;
                     currentLine = inClient.readLine();
                 }
-                bs64Out.flush();
-                bs64Out.close();
+                //bs64Out.flush();
+                //bs64Out.close();
                 //fout.flush();
                 //fout.close();
 
@@ -235,7 +235,6 @@ public class Client implements Runnable {
 
              //if
             }while (inClient.ready()); //End of do-while
-
 
         }
     }

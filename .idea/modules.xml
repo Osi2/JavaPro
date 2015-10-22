@@ -17,6 +17,7 @@
       <module fileurl="file://$PROJECT_DIR$/Work 4.1 - Servlet/Work 4.1 - Servlet.iml" filepath="$PROJECT_DIR$/Work 4.1 - Servlet/Work 4.1 - Servlet.iml" />
       <module fileurl="file://$PROJECT_DIR$/Work 4.2 - Chat Client/Work 4.2 - Chat Client.iml" filepath="$PROJECT_DIR$/Work 4.2 - Chat Client/Work 4.2 - Chat Client.iml" />
       <module fileurl="file://$PROJECT_DIR$/Work 4.2 - Chat Server/Work 4.2 - Chat Server.iml" filepath="$PROJECT_DIR$/Work 4.2 - Chat Server/Work 4.2 - Chat Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib/lib.iml" filepath="$PROJECT_DIR$/lib/lib.iml" />
     </modules>
   </component>
 </project>
