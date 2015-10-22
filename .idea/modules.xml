@@ -2,17 +2,18 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Lab 1.1/Lab 1.1.iml" filepath="$PROJECT_DIR$/Lab 1.1/Lab 1.1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Lab 1.2/Lab 1.2.iml" filepath="$PROJECT_DIR$/Lab 1.2/Lab 1.2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Lab 1.3/Lab 1.3.iml" filepath="$PROJECT_DIR$/Lab 1.3/Lab 1.3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Lab 2.1/Lab 2.1.iml" filepath="$PROJECT_DIR$/Lab 2.1/Lab 2.1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Lab 2.2/Lab 2.2.iml" filepath="$PROJECT_DIR$/Lab 2.2/Lab 2.2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Lab 2.3/Lab 2.3.iml" filepath="$PROJECT_DIR$/Lab 2.3/Lab 2.3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Lab 3.1/Lab 3.1.iml" filepath="$PROJECT_DIR$/Lab 3.1/Lab 3.1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Lab 3.2/Lab 3.2.iml" filepath="$PROJECT_DIR$/Lab 3.2/Lab 3.2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Work 2.1/Work 2.1.iml" filepath="$PROJECT_DIR$/Work 2.1/Work 2.1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Work 3.1/Work 3.1.iml" filepath="$PROJECT_DIR$/Work 3.1/Work 3.1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Work 3.2/Work 3.2.iml" filepath="$PROJECT_DIR$/Work 3.2/Work 3.2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab 1.1 - Annotation 1/Lab 1.1 - Annotation 1.iml" filepath="$PROJECT_DIR$/Lab 1.1 - Annotation 1/Lab 1.1 - Annotation 1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab 1.2 - Annotation 2/Lab 1.2 - Annotation 2.iml" filepath="$PROJECT_DIR$/Lab 1.2 - Annotation 2/Lab 1.2 - Annotation 2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab 1.3 - Serialization/Lab 1.3 - Serialization.iml" filepath="$PROJECT_DIR$/Lab 1.3 - Serialization/Lab 1.3 - Serialization.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab 2.1 - Cache TTL/Lab 2.1 - Cache TTL.iml" filepath="$PROJECT_DIR$/Lab 2.1 - Cache TTL/Lab 2.1 - Cache TTL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab 2.2 - HTTP Streams/Lab 2.2 - HTTP Streams.iml" filepath="$PROJECT_DIR$/Lab 2.2 - HTTP Streams/Lab 2.2 - HTTP Streams.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab 2.3 - HTTP Zip File/Lab 2.3 - HTTP Zip File.iml" filepath="$PROJECT_DIR$/Lab 2.3 - HTTP Zip File/Lab 2.3 - HTTP Zip File.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab 3.1 - JAXB/Lab 3.1 - JAXB.iml" filepath="$PROJECT_DIR$/Lab 3.1 - JAXB/Lab 3.1 - JAXB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab 3.2 - GSON/Lab 3.2 - GSON.iml" filepath="$PROJECT_DIR$/Lab 3.2 - GSON/Lab 3.2 - GSON.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab 3.3 - Yahoo XML/Lab 3.3 - Yahoo XML.iml" filepath="$PROJECT_DIR$/Lab 3.3 - Yahoo XML/Lab 3.3 - Yahoo XML.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Work 2.1 - HTTP Server/Work 2.1 - HTTP Server.iml" filepath="$PROJECT_DIR$/Work 2.1 - HTTP Server/Work 2.1 - HTTP Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Work 3.1 - JAXB/Work 3.1 - JAXB.iml" filepath="$PROJECT_DIR$/Work 3.1 - JAXB/Work 3.1 - JAXB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Work 3.2 - Yahoo JSON/Work 3.2 - Yahoo JSON.iml" filepath="$PROJECT_DIR$/Work 3.2 - Yahoo JSON/Work 3.2 - Yahoo JSON.iml" />
       <module fileurl="file://$PROJECT_DIR$/Work 4.1 - Servlet/Work 4.1 - Servlet.iml" filepath="$PROJECT_DIR$/Work 4.1 - Servlet/Work 4.1 - Servlet.iml" />
       <module fileurl="file://$PROJECT_DIR$/Work 4.2 - Chat Client/Work 4.2 - Chat Client.iml" filepath="$PROJECT_DIR$/Work 4.2 - Chat Client/Work 4.2 - Chat Client.iml" />
       <module fileurl="file://$PROJECT_DIR$/Work 4.2 - Chat Server/Work 4.2 - Chat Server.iml" filepath="$PROJECT_DIR$/Work 4.2 - Chat Server/Work 4.2 - Chat Server.iml" />
