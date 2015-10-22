@@ -10,7 +10,24 @@ public class Person {
 
     @Override
     public String toString(){
-    return "Person: " + name + " " + surname + " " + phones[0].toString() + " " + sites[0].toString() + " " + address.toString();
+    return "Person: " + name + " " + surname + " phones: " + getPhones() + " sites: " + getSites() + " " + address.toString();
+    }
+
+    private String getPhones(){
+        String result = "";
+
+        for(String s: phones){
+            result += s + " ";
+        }
+        return result;
+    }
+
+    private String getSites(){
+        String result = "";
+        for(String s: sites){
+            result += s + " ";
+        }
+        return result;
     }
 }
 

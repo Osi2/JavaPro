@@ -1,0 +1,2 @@
+Rate id: USDEUR | Rate: 0.8809 | Date: 10/20/2015 | Time: 6:17pm | Ask: 0.8810 | Bid: 0.8809
+Rate id: USDUAH | Rate: 22.235 | Date: 10/20/2015 | Time: 6:17pm | Ask: 22.3040 | Bid: 22.2350
