@@ -13,7 +13,7 @@ public class AddServlet extends HttpServlet {
 			throws IOException 
 	{
 		InputStream is = req.getInputStream();
-		byte[] buf = new byte[is.available()];
+		byte[] buf = new byte[req.getContentLength()];
 		is.read(buf);
 		
 		Message msg = Message.fromJSON(new String(buf));

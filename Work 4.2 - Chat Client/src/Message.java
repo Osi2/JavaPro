@@ -42,6 +42,7 @@ public class Message implements Serializable {
 		OutputStream os = conn.getOutputStream();
 		try {
 			String json = toJSON();
+			System.out.println("json: " + json);
 			os.write(json.getBytes());
 			
 			return conn.getResponseCode();

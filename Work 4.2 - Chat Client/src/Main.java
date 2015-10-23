@@ -62,6 +62,7 @@ public class Main {
 				Message m = new Message();
 				m.setText(text);
 				m.setFrom(login);
+				System.out.println(m.toString());
 
 				try {
 					int res = m.send("http://localhost:8888/add");
