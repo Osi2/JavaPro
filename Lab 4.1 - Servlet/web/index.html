@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form action="/Anketa" method="post">
+<form action="/anketa" method="post">
 <br>
     <table>
         <tr>
@@ -22,21 +22,21 @@
 
                     <tr>
                         <td height="30">First Name: </td>
-                        <td><input type="text"></td>
+                        <td><input type="text" name="firstName"></td>
                     </tr>
 
                     <tr>
                         <td height="30">Last Name: </td>
-                        <td><input type="text"></td>
+                        <td><input type="text" name="lastName"></td>
                     </tr>
 
                 <tr>
                     <td height="30">Your age: </td>
-                    <td><input type="text"></td>
+                    <td><input type="text" name="age"></td>
                 </tr>
                 <tr>
                     <td height="30">Home town: </td>
-                    <td><input type="text"></td>
+                    <td><input type="text" name="town"></td>
                 </tr>
                     <tr>
                         <td height="60"><hr></td>
@@ -44,11 +44,11 @@
                     </tr>
                 <tr>
                     <td height="30">Primary skills: </td>
-                    <td><input type="text"></td>
+                    <td><input type="text" name="primarySkills"></td>
                 </tr>
                     <tr>
-                        <td height="30">Secondary skills: </td>
-                        <td><input type="text"></td>
+                        <td height="30">Language: </td>
+                        <td><input type="text" name="language"></td>
                     </tr>
                     <tr>
                         <td height="60"><hr></td>
@@ -66,9 +66,9 @@
                     <tr>
                         <td height="30">DBMS Oracle: </td>
                         <td>
-                            <input type="radio" name="database" value="beginner" checked><small>Beginner</small>
-                            <input type="radio" name="database" value="advanced"><small>Advanced</small>
-                            <input type="radio" name="database" value="expert"><small>Expert</small>
+                            <input type="radio" name="oracle" value="beginner" checked><small>Beginner</small>
+                            <input type="radio" name="oracle" value="advanced"><small>Advanced</small>
+                            <input type="radio" name="oracle" value="expert"><small>Expert</small>
                         </td>
                     </tr>
                     <tr><td></td><td></td></tr>
@@ -118,7 +118,7 @@
                         <td><hr></td>
                     </tr>
 
-                    <td><input type="button" value="Submit"></td>
+                    <td><input type="submit" value="Submit"></td>
                 </table>
 
 
