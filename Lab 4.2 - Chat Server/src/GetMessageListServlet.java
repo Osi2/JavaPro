@@ -24,7 +24,7 @@ public class GetMessageListServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-		System.out.println("doPost invoked");
+		System.out.println("GetMessageList invoked");
 		String user = req.getParameter("getUserChat");
 		System.out.println("get chat messages with user: " + user);
 

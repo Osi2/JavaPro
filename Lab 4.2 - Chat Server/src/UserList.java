@@ -17,6 +17,10 @@ public class UserList {
         }
         return null;
     }
+    static {
+        userList.add(new User("Ivan","Ivan","Ivanov","11111"));
+        userList.add(new User("Petro","Petr","Ivanov","11111"));
+    }
 
     public static List<User> getUserList(){return userList;}
 
