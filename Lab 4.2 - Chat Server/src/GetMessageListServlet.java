@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class GetListServlet extends HttpServlet {
+public class GetMessageListServlet extends HttpServlet {
 	
 	private MessageList msgList = MessageList.getInstance();
 	
@@ -21,5 +21,16 @@ public class GetListServlet extends HttpServlet {
 			OutputStream os = resp.getOutputStream();
 			os.write(json.getBytes());
 		}
+	}
+
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		System.out.println("doPost invoked");
+		String user = req.getParameter("getUserChat");
+		System.out.println("get chat messages with user: " + user);
+
+		resp.setContentType("text/plain");
+		resp.setCharacterEncoding("UTF-8");
+		resp.getWriter().write("Some response");
+
 	}
 }

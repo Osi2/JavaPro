@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class Message implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	private Date date = new Date();

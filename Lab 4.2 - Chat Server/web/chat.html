@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+
+<script>
+     function getResponse(user) {
+        window.alert(user);
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                var data = xhr.responseText;
+                callback(data);
+            }
+        }
+        xhr.open('POST', 'getMsg', true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send("getUserChat=" + user);
+    }
+
+    function callback(response){
+        window.alert(response);
+    }
+</script>
+
+<script>
+    function nameChanged(){
+
+    var select = document.getElementById("userList");
+    var listLength = select.options.length;
+
+    var user;
+
+        for(var i=0;i<listLength;i++){
+            if(select.options[i].selected){
+               user = select.options[i].value;
+               break;
+            }
+        }
+
+        getResponse(user);
+
+        var chat = document.getElementById("chatText");
+        var chatLength = chat.options.length;
+
+        for (i = 0; i < chatLength; i++) {
+          chat.options[i] = null;
+        }
+
+        chat.options[0] = new Option("Some text");
+
+    }
+</script>
+<body>
+<form>
+<table>
+    <tr>
+        <td width="10%"></td>
+        <td>
+            <select id="userList" size="3" style="width: 150px;height: 300px" onchange="nameChanged()">
+                <option style="background-color: darkslateblue;color: cornsilk">Main chat</option>
+                <option><hr></option>
+                <option style="color: green">Ivan</option>
+                <option style="color: green">Petro</option>
+                <option style="color: green">Mykola</option>
+                <option style="color: red">Stanislav</option>
+            </select>
+        </td>
+        <td>
+            <select id="chatText" size="100" style="width: 1000px;height: 200px">
+                <option style="font-family: monospace;font-size: medium">Ivan&nbsp;&nbsp;&nbsp;(12:02):&nbsp;&nbsp;&nbsp;Hey guys, let's play football</option>
+                <option style="font-family: monospace;font-size: medium">Petro&nbsp;&nbsp;(12:02):&nbsp;&nbsp;&nbsp;Who is coming</option>
+                <option style="font-family: monospace;font-size: medium">Mykola (12:03):&nbsp;&nbsp;&nbsp;Playing outside or indoors today?</option>
+            </select>
+            <textarea style="height: 100px;width: 995px"></textarea>
+        </td>
+    </tr>
+    <tr><td></td><td></td><td><input type="submit" value="Submit text"></td></tr>
+    </table>
+
+</form>
+</body>
+</html>

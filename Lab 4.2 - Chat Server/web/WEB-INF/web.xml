@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>GetMsgList</servlet-name>
+		<servlet-class>GetMessageListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetMsgList</servlet-name>
+		<url-pattern>/getMsg</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>GetUserList</servlet-name>
+		<servlet-class>GetUserListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetUserList</servlet-name>
+		<url-pattern>/getUser</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AddMsg</servlet-name>
+		<servlet-class>AddMessageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddMsg</servlet-name>
+		<url-pattern>/addMsg</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddUser</servlet-name>
+		<servlet-class>AddUserServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddUser</servlet-name>
+		<url-pattern>/addUser</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>chat.html</welcome-file>
+	</welcome-file-list>
+</web-app>

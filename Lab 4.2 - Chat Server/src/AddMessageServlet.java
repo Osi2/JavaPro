@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AddServlet extends HttpServlet {
+public class AddMessageServlet extends HttpServlet {
 
 	private MessageList msgList = MessageList.getInstance();
 	
