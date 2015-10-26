@@ -33,8 +33,12 @@ public class GetMessageListServlet extends HttpServlet {
 		System.out.println("Number of messages by user " + user + ": " + String.valueOf(msgList.getCount()));
 		String json = msgList.toJSON(0);
 
-		OutputStream os = resp.getOutputStream();
-		os.write(json.getBytes());
+		System.out.println("Json: " + json);
+
+		resp.setContentType("application/json");
+		resp.getWriter().write(json);
+		//OutputStream os = resp.getOutputStream();
+		//os.write(json.getBytes());
 
 		//resp.setContentType("text/plain");
 		//resp.setCharacterEncoding("UTF-8");

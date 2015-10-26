@@ -46,7 +46,7 @@
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4) {
                 var data = xhr.responseText;
-                callback(data);
+                //callback(data);
             }
         }
         xhr.open('POST', 'addMsg', true);
@@ -54,6 +54,7 @@
         xhr.send(json);
 
         message.value = "";
+        changeUser();
     }
 
 <!-- Get all messages for selected user and populate chatText element with them-->
@@ -64,7 +65,7 @@
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4) {
                 var data = xhr.responseText;
-                callback(data);
+                callback2(data);
             }
         }
         xhr.open('POST', 'getMsg', true);
@@ -72,22 +73,22 @@
         xhr.send("getUserChat=" + user);
     }
 
-        function callback(response){
+        function callback2(response){
             var json = JSON.parse(response);
-            window.alert(json);
+            //window.alert(json);
 
             var chat = document.getElementById("chatText");
             var chatLength = chat.options.length;
+
 
             for (i = 0; i < chatLength; i++) {
               chat.options[i] = null;
             }
 
-            //chat.options[0] = new Option("Some text");
-
-            for(var i = 0; i<json.counters.length; i++){
-                var counter = json.counters[i];
-                chat.options[i] = new Option(counter.text);
+            for(var i = 0; i<json.length; i++){
+                var object = json[i];
+                //window.alert(object.text);
+                chat.options[i] = new Option(object.from + "  [" + object.date + "]:     " + object.text);
             }
         }
 </script>
