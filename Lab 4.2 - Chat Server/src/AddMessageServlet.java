@@ -12,14 +12,29 @@ public class AddMessageServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException 
 	{
+		System.out.println("AddMessageServlet invoked");
+		System.out.println("Content length: " + String.valueOf(req.getContentLength()));
+
 		InputStream is = req.getInputStream();
 		byte[] buf = new byte[req.getContentLength()];
 		is.read(buf);
+
+		System.out.println("json: " + new String(buf));
 		
 		Message msg = Message.fromJSON(new String(buf));
-		if (msg != null)
-			msgList.add(msg);
-		else
+		if (msg != null) {
+			System.out.println("new message created");
+			System.out.println("to: " + msg.getTo());
+			System.out.println("from: " + msg.getFrom());
+			System.out.println("text: " + msg.getText());
+			UserList.getUserByName(msg.getTo()).addUserMessage(msg);
+			//msgList.add(msg);
+		}
+		else {
+			System.out.println("message is null");
 			resp.setStatus(400); // Bad request
+		}
+
+
 	}
 }

@@ -24,13 +24,21 @@ public class GetMessageListServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-		System.out.println("GetMessageList invoked");
-		String user = req.getParameter("getUserChat");
-		System.out.println("get chat messages with user: " + user);
+		System.out.println("GetMessageListServlet invoked");
 
-		resp.setContentType("text/plain");
-		resp.setCharacterEncoding("UTF-8");
-		resp.getWriter().write("Some response");
+		String user = req.getParameter("getUserChat");
+		System.out.println("get chat messages for user: " + user);
+
+		msgList = UserList.getUserByName(user).getUserMessages();
+		System.out.println("Number of messages by user " + user + ": " + String.valueOf(msgList.getCount()));
+		String json = msgList.toJSON(0);
+
+		OutputStream os = resp.getOutputStream();
+		os.write(json.getBytes());
+
+		//resp.setContentType("text/plain");
+		//resp.setCharacterEncoding("UTF-8");
+		//resp.getWriter().write("Some response");
 
 	}
 }

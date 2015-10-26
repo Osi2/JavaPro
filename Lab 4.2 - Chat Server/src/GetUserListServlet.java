@@ -8,6 +8,7 @@ import java.io.IOException;
  */
 public class GetUserListServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("GetUserListServlet invoked");
 
     }
 }

@@ -9,5 +9,6 @@ import java.io.IOException;
 public class AddUserServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("AddUserServlet invoked");
     }
 }

@@ -9,7 +9,8 @@ import java.io.IOException;
 public class AuthenticateServlet  extends HttpServlet {
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        System.out.println("Authenticate invoked");
+        System.out.println("AuthenticateAervlet invoked");
+
         String user = req.getParameter("nickName");
         System.out.println("get password for nickName: " + user);
 

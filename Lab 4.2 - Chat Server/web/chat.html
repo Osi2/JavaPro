@@ -5,10 +5,61 @@
     <title></title>
 </head>
 
-
 <script>
-     function getResponse(user) {
-        window.alert(user);
+    function changeUser(){
+        //window.alert("changeUser");
+        user = getSelectedUser();
+        //window.alert(user);
+        getMessagesForUser(user);
+    }
+
+    function getSelectedUser(){
+
+    var select = document.getElementById("userList");
+    var listLength = select.options.length;
+
+    var user;
+
+        for(var i = 0; i < listLength; i++){
+            if(select.options[i].selected){
+               user = select.options[i].value;
+               break;
+            }
+        }
+
+        return user;
+    }
+
+    function sendMessage(){
+        var message = document.getElementById("myMessage");
+        var toUser = getSelectedUser();
+        //window.alert("user: " + toUser);
+
+
+        var json = '{'
+                    + '"from" : "Ivan",'
+                    + '"to" :  "' + toUser + '" ,'
+                    + '"text" : "' + message.value + '"'
+                    + '}'
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                var data = xhr.responseText;
+                callback(data);
+            }
+        }
+        xhr.open('POST', 'addMsg', true);
+        xhr.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+        xhr.send(json);
+
+        message.value = "";
+    }
+
+<!-- Get all messages for selected user and populate chatText element with them-->
+
+    function getMessagesForUser(user){
+        //window.alert("getMessagesForUser");
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4) {
@@ -21,46 +72,33 @@
         xhr.send("getUserChat=" + user);
     }
 
-    function callback(response){
-        //window.alert(response);
-    }
-</script>
+        function callback(response){
+            var json = JSON.parse(response);
+            window.alert(json);
 
-<script>
-    function nameChanged(){
+            var chat = document.getElementById("chatText");
+            var chatLength = chat.options.length;
 
-    var select = document.getElementById("userList");
-    var listLength = select.options.length;
+            for (i = 0; i < chatLength; i++) {
+              chat.options[i] = null;
+            }
 
-    var user;
+            //chat.options[0] = new Option("Some text");
 
-        for(var i=0;i<listLength;i++){
-            if(select.options[i].selected){
-               user = select.options[i].value;
-               break;
+            for(var i = 0; i<json.counters.length; i++){
+                var counter = json.counters[i];
+                chat.options[i] = new Option(counter.text);
             }
         }
-
-        getResponse(user);
-
-        var chat = document.getElementById("chatText");
-        var chatLength = chat.options.length;
-
-        for (i = 0; i < chatLength; i++) {
-          chat.options[i] = null;
-        }
-
-        chat.options[0] = new Option("Some text");
-
-    }
 </script>
+
 <body>
-<form>
+<!--<form>-->
 <table>
     <tr>
         <td width="10%"></td>
         <td>
-            <select id="userList" size="3" style="width: 150px;height: 300px" onchange="nameChanged()">
+            <select id="userList" size="3" style="width: 150px;height: 300px" onchange="changeUser()">
                 <option style="background-color: darkslateblue;color: cornsilk">Main chat</option>
                 <option><hr></option>
                 <option style="color: green">Ivan</option>
@@ -71,16 +109,18 @@
         </td>
         <td>
             <select id="chatText" size="100" style="width: 1000px;height: 200px">
+                <!--
                 <option style="font-family: monospace;font-size: medium">Ivan&nbsp;&nbsp;&nbsp;(12:02):&nbsp;&nbsp;&nbsp;Hey guys, let's play football</option>
                 <option style="font-family: monospace;font-size: medium">Petro&nbsp;&nbsp;(12:02):&nbsp;&nbsp;&nbsp;Who is coming</option>
                 <option style="font-family: monospace;font-size: medium">Mykola (12:03):&nbsp;&nbsp;&nbsp;Playing outside or indoors today?</option>
+                -->
             </select>
-            <textarea style="height: 100px;width: 995px"></textarea>
+            <textarea style="height: 100px;width: 995px" id="myMessage"></textarea>
         </td>
     </tr>
-    <tr><td></td><td></td><td><input type="submit" value="Submit text"></td></tr>
+    <tr><td></td><td></td><td><input type="submit" value="Submit text" onclick="sendMessage()"></td></tr>
     </table>
 
-</form>
+<!--</form>-->
 </body>
 </html>
