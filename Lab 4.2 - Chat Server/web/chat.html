@@ -13,6 +13,38 @@
         document.getElementById("loggedUser").innerHTML = "You logged as: <font color='blue'>" + name + "</font>";
 
     }
+    
+    function changeChatRoom(){
+
+        clearSelectedUsers();
+
+        //window.alert("changeUser");
+        //chatRoom = getSelectedChatRoom();
+        //window.alert(user);
+        //getMessagesForChat(chatRoom);
+    }
+
+    function getMessagesForChat(chatRoom){}
+
+    function getSelectedChatRoom(){
+
+        clearSelectedChatRoomList();
+
+        //var select = document.getElementById("userList");
+        //var listLength = select.options.length;
+
+        //var user;
+
+        //    for(var i = 0; i < listLength; i++){
+        //        if(select.options[i].selected){
+        //           user = select.options[i].value;
+        //           break;
+        //        }
+        //    }
+
+        //    return user;
+    }
+
     function changeUser(){
 
         //window.alert("changeUser");
@@ -23,25 +55,27 @@
 
     function getSelectedUser(){
 
-    var select = document.getElementById("userList");
-    var listLength = select.options.length;
+        clearSelectedChatRoomList();
 
-    var user;
+        var select = document.getElementById("userList");
+        var listLength = select.options.length;
 
-        for(var i = 0; i < listLength; i++){
-            if(select.options[i].selected){
-               user = select.options[i].value;
-               break;
+        var user;
+
+            for(var i = 0; i < listLength; i++){
+                if(select.options[i].selected){
+                   user = select.options[i].value;
+                   break;
+                }
             }
-        }
 
-        return user;
+            return user;
     }
 
     function sendMessage(){
         var message = document.getElementById("myMessage");
         var toUser = getSelectedUser();
-        window.alert("user: " + toUser);
+        //window.alert("user: " + toUser);
         var fromUser = localStorage.loggedUser;
 
 
@@ -51,7 +85,7 @@
                     + '"text" : "' + message.value + '"'
                     + '}'
 
-        window.alert(json);
+        //window.alert(json);
 
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
@@ -110,6 +144,23 @@
                 chat.options[i] = new Option(object.from + "  [" + object.date + "]:     " + object.text);
             }
         }
+
+    function clearSelectedChatRoomList(){
+        var rooms = document.getElementById("chatRoomList");
+
+        for(var i = 0; i < rooms.length; i++){
+          rooms[i].selected = false;
+        }
+    }
+
+    function clearSelectedUsers(){
+        var users = document.getElementById("userList");
+
+        for(var i = 0; i < users.length; i++){
+          users[i].selected = false;
+        }
+    }
+
 </script>
 
 <body>
@@ -127,16 +178,16 @@
     <tr>
         <td width="10%"></td>
         <td>
-            <font style="color:red;font-size: small">Chat rooms</font><br>
-            <select id="chatList" size="3" style="width: 150px;height: 80px" onchange="changeUser()">
-                <option style="background-color: darkslateblue;color: cornsilk">Main chat</option>
+            <center><font style="color:red;font-size: small">Chat rooms</font></center>
+            <select id="chatRoomList" size="3" style="width: 150px;height: 80px" onchange="changeChatRoom()">
+                <option style="color: green">Public</option>
                 <option style="color: green">room 1</option>
             </select>
             <div style="height: 10px"></div>
-            <font style="color:red;font-size: small">Users</font>
-            <br>
+            <center><font style="color:red;font-size: small">Users</font></center>
 
-            <select id="userList" size="3" style="width: 150px;height: 180px" onchange="changeUser()">
+
+            <select id="userList" size="3" style="width: 150px;height: 180px;align-content: center" onchange="changeUser()">
                 <option style="color: green">Ivan</option>
                 <option style="color: green">Petro</option>
                 <option style="color: green">Mykola</option>

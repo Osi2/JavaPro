@@ -13,7 +13,7 @@ public class User {
 
     private int status;
 
-    private static MessageList userMessages  = new MessageList();
+    private MessageList userMessages  = new MessageList();
 
     public User(String nickName, String firstName, String lastName, String password){
         this.nickName = nickName;
@@ -28,7 +28,7 @@ public class User {
 
     public String getPassword(){return password;}
 
-    public static void addUserMessage(Message m){userMessages.add(m);}
+    public void addUserMessage(Message m){userMessages.add(m);}
 
-    public static MessageList getUserMessages(){return userMessages;}
+    public MessageList getUserMessages(){return userMessages;}
 }
