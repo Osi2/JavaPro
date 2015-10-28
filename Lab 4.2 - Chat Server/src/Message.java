@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class Message implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	private Date date = new Date();
@@ -16,6 +17,7 @@ public class Message implements Serializable {
 	private String text;
 	
 	public String toJSON() {
+		//Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy'T'HH:mm:ss.SSS'Z'").create();
 		Gson gson = new GsonBuilder().create();
 		return gson.toJson(this);
 	}

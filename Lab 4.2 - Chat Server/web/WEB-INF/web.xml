@@ -4,22 +4,59 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
 	<servlet>
-		<servlet-name>GetList</servlet-name>
-		<servlet-class>GetListServlet</servlet-class>
+		<servlet-name>GetMsgList</servlet-name>
+		<servlet-class>GetMessageListServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>GetList</servlet-name>
-		<url-pattern>/get</url-pattern>
+		<servlet-name>GetMsgList</servlet-name>
+		<url-pattern>/getMsg</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
-		<servlet-name>Add</servlet-name>
-		<servlet-class>AddServlet</servlet-class>
+		<servlet-name>GetUserList</servlet-name>
+		<servlet-class>GetUserListServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Add</servlet-name>
-		<url-pattern>/add</url-pattern>
+		<servlet-name>GetUserList</servlet-name>
+		<url-pattern>/getUser</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>GetChatRoomList</servlet-name>
+		<servlet-class>GetChatLRoomListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetChatRoomList</servlet-name>
+		<url-pattern>/getChatRoom</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddMsg</servlet-name>
+		<servlet-class>AddMessageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddMsg</servlet-name>
+		<url-pattern>/addMsg</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddUser</servlet-name>
+		<servlet-class>AddUserServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddUser</servlet-name>
+		<url-pattern>/addUser</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Authenticate</servlet-name>
+		<servlet-class>AuthenticateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Authenticate</servlet-name>
+		<url-pattern>/auth</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>

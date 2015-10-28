@@ -29,4 +29,6 @@ public class MessageList {
 		} else
 			return null;
 	}
+
+	public int getCount(){return list.size();}
 }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+    <script>
+        function authenticate(){
+            var nickName = document.getElementById("nickName").value;
+            localStorage.loggedUser = nickName;
+            getResponse(nickName);
+        }
+        function getResponse(user) {
+            //window.alert(user);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    var data = xhr.responseText;
+                    callback(data);
+                }
+            }
+            xhr.open('POST', 'auth', true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("nickName=" + user);
+        }
+
+        function callback(response){
+            var pass = document.getElementById("password");
+            if (response == pass.value){
+                window.location = "chat.html";
+            }
+        }
+    </script>
+<body>
+   <!-- <form action="auth" method="post">-->
+        <br>
+        <br>
+        <table>
+            <th width="30%"></th><th  width="35%" align="left">Enter your credentials</th><th><a href="new.html">or create new user</a></th>
+            <tr>
+                <td height="30"></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td></td><td>Nick Name:</td><td><input type="text" id="nickName" name="nickName"></td>
+            </tr>
+            <tr>
+                <td></td><td>Password:</td><td><input type="text" id="password" name="password"></td>
+            </tr>
+            <tr>
+                <td height="30"></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit" onclick="authenticate()"></td>
+            </tr>
+
+        </table>
+    <!--</form>-->
+</body>
+</html>

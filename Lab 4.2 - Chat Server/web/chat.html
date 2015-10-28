@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<script>
+    window.onload=function(){
+
+        var name=localStorage.loggedUser;
+        //window.alert(name);
+        document.getElementById("loggedUser").innerHTML = "You logged as: <font color='blue'>" + name + "</font>";
+
+        var interval = setInterval(repeat, 10000);
+
+    }
+
+    function repeat(){
+        getChatRooms();
+        getUsers();
+    }
+    
+    function changeChatRoom(){
+
+        clearSelectedUsers();
+
+        chatRoom = getSelectedChatRoom();
+
+        getMessagesForChatRoom(chatRoom);
+    }
+
+    function getMessagesForChatRoom(chatRoom){}
+
+    function getSelectedChatRoom(){
+
+        clearSelectedChatRoomList();
+
+        var chatRoom = document.getElementById("chatRoomList");
+        var chatRoomLength = chatRoom.options.length;
+
+        var chatRoom;
+
+            for(var i = 0; i < chatRoomLength; i++){
+                if(chatRoom.options[i].selected){
+                   user = chatRoom.options[i].value;
+                   break;
+                }
+            }
+
+            return chatRoom;
+    }
+
+    function changeUser(){
+
+        //window.alert("changeUser");
+        user = getSelectedUser();
+        //window.alert(user);
+        getMessagesForUser(user);
+    }
+
+    function getSelectedUser(){
+
+        clearSelectedChatRoomList();
+
+        var select = document.getElementById("userList");
+        var listLength = select.options.length;
+
+        var user;
+
+            for(var i = 0; i < listLength; i++){
+                if(select.options[i].selected){
+                   user = select.options[i].value;
+                   break;
+                }
+            }
+
+            return user;
+    }
+
+    function sendMessage(){
+        var message = document.getElementById("myMessage");
+        var toUser = getSelectedUser();
+        //window.alert("user: " + toUser);
+        var fromUser = localStorage.loggedUser;
+
+
+        var json = '{'
+                    + '"from" : "' + fromUser + '" ,'
+                    + '"to" :  "' + toUser + '" ,'
+                    + '"text" : "' + message.value + '"'
+                    + '}'
+
+        //window.alert(json);
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                var data = xhr.responseText;
+                //callback(data);
+            }
+        }
+        xhr.open('POST', 'addMsg', true);
+        xhr.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+        xhr.send(json);
+
+        message.value = "";
+        changeUser();
+        getMessagesForUser(toUser);
+    }
+
+<!-- Get all messages for selected user and populate chatText element with them-->
+
+    function getMessagesForUser(user){
+
+        var chat = document.getElementById("chatText");
+        var chatLength = chat.options.length;
+
+        for (i = 0; i < chatLength; i++) {
+              chat.options[i] = null;
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                var data = xhr.responseText;
+                callbackMsg(data);
+            }
+        }
+        xhr.open('POST', 'getMsg', true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send("getUserChat=" + user);
+    }
+
+    function callbackMsg(response){
+
+        var json = JSON.parse(response);
+        var chat = document.getElementById("chatText");
+
+
+        for(var i = 0; i<json.length; i++){
+            var object = json[i];
+            chat.options[i] = new Option(object.from + "  [" + object.date + "]:     " + object.text);
+        }
+    }
+
+    function getChatRooms(){
+
+        var chatRooms = document.getElementById("chatRoomList");
+        var chatRoomLength = chatRooms.options.length;
+
+        for (i = 0; i < chatRoomLength; i++) {
+            chatRooms.options[i] = null;
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                var data = xhr.responseText;
+                callbackChatRooms(data);
+            }
+        }
+        xhr.open('POST', 'getChatRoom', true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(null);
+    }
+
+    function callbackChatRooms(response){
+        var json = JSON.parse(response);
+
+        var chatRooms = document.getElementById("chatRoomList");
+
+        for(var i = 0; i<json.length; i++){
+            var object = json[i];
+            chatRooms.options[i] = new Option(object.name);
+        }
+    }
+
+    function getUsers(){
+
+        //window.alert("getMessagesForUser");
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                var data = xhr.responseText;
+                callbackUsers(data);
+            }
+        }
+        xhr.open('POST', 'getUser', true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(null);
+    }
+
+    function callbackUsers(response){
+        var json = JSON.parse(response);
+        var user = localStorage.loggedUser;
+        var users = document.getElementById("userList");
+        var usersLength = users.options.length;
+
+        for (var i = 0; i < json.length; i++) {
+            var object = json[i];
+
+            for (var j = 0; j < usersLength; j ++) {
+                if (users.indexOf(object) <= 0 && user != object.nickName){
+                    users.options[i] = new Option(object.nickName);
+                }
+            }
+
+
+        }
+
+    }
+
+    function clearSelectedChatRoomList(){
+        var rooms = document.getElementById("chatRoomList");
+
+        for(var i = 0; i < rooms.length; i++){
+          rooms[i].selected = false;
+        }
+    }
+
+    function clearSelectedUsers(){
+        var users = document.getElementById("userList");
+
+        for(var i = 0; i < users.length; i++){
+          users[i].selected = false;
+        }
+    }
+
+</script>
+
+<body>
+<!--<form>-->
+<br>
+<table>
+    <tr>
+        <td width="20%"></td>
+        <td width="20%" id="loggedUser"></td>
+        <td></td>
+    </tr>
+</table>
+<br>
+<table>
+    <tr>
+        <td width="10%"></td>
+        <td>
+            <center><font style="color:red;font-size: small">Chat rooms</font></center>
+            <select id="chatRoomList" size="3" style="width: 150px;height: 80px" onchange="changeChatRoom()">
+                <option style="color: green">Public</option>
+                <option style="color: green">room 1</option>
+            </select>
+            <div style="height: 10px"></div>
+            <center><font style="color:red;font-size: small">Users</font></center>
+
+
+            <select id="userList" size="3" style="width: 150px;height: 180px;align-content: center" onchange="changeUser()">
+                <option style="color: green">Ivan</option>
+                <option style="color: green">Petro</option>
+                <option style="color: green">Mykola</option>
+                <option style="color: green">Yegor</option>
+                <option style="color: red">Stanislav</option>
+            </select>
+        </td>
+        <td width="2%"></td>
+        <td>
+            <font style="text-align: left;color:red;font-size: small">Text</font><br>
+            <select id="chatText" size="100" style="width: 1000px;height: 200px">
+                <!--
+                <option style="font-family: monospace;font-size: medium">Ivan&nbsp;&nbsp;&nbsp;(12:02):&nbsp;&nbsp;&nbsp;Hey guys, let's play football</option>
+                <option style="font-family: monospace;font-size: medium">Petro&nbsp;&nbsp;(12:02):&nbsp;&nbsp;&nbsp;Who is coming</option>
+                <option style="font-family: monospace;font-size: medium">Mykola (12:03):&nbsp;&nbsp;&nbsp;Playing outside or indoors today?</option>
+                -->
+            </select>
+            <textarea style="height: 100px;width: 995px" id="myMessage"></textarea>
+        </td>
+    </tr>
+    <tr><td></td><td></td></td><td></td><td><input type="submit" value="Submit text" onclick="sendMessage()"></td></tr>
+    </table>
+
+<!--</form>-->
+</body>
+</html>

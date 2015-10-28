@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script>
+        function addNew(){
+            var pass1 = document.getElementById("password1");
+            var pass2 = document.getElementById("password2");
+
+            window.alert(pass1.text);
+            window.alert(pass2.text);
+
+            if (pass1.text != pass2.text){
+                window.alert("Passwords do not match. Try again");
+            }
+        }
+</script>
+<body>
+<form action="new" method="post">
+    <br>
+    <br>
+    <table>
+        <th width="30%" height="30"></th><th width="35%"  align="left">Add Information</th><th><a href="index.html">back to login window</a></th>
+        <tr>
+            <td height="40"></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td>First Name:</td><td><input type="text" name="fistName"></td>
+        </tr>
+        <tr>
+            <td></td><td>Last Name:</td><td><input type="text" name="lastName"></td>
+        </tr>
+        <tr>
+            <td></td><td>Nick Name:</td><td><input type="text" name="nickName"></td>
+        </tr>
+        <tr>
+            <td height="40"></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td>Enter password:</td><td><input type="text" id="password1" name="password1"></td>
+        </tr>
+        <tr>
+            <td></td><td>Confirm password:</td><td><input type="text" id="password2" name="password2"></td>
+        </tr>
+        <tr>
+            <td height="40"></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="create user"></td>
+            <td></td>
+        </tr>
+    </table>
+
+</form>
+</body>
+</html>
