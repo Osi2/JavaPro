@@ -6,7 +6,15 @@
 </head>
 
 <script>
+    window.onload=function(){
+
+        var name=localStorage.loggedUser;
+        //window.alert(name);
+        document.getElementById("loggedUser").innerHTML = "You logged as: <font color='blue'>" + name + "</font>";
+
+    }
     function changeUser(){
+
         //window.alert("changeUser");
         user = getSelectedUser();
         //window.alert(user);
@@ -33,14 +41,17 @@
     function sendMessage(){
         var message = document.getElementById("myMessage");
         var toUser = getSelectedUser();
-        //window.alert("user: " + toUser);
+        window.alert("user: " + toUser);
+        var fromUser = localStorage.loggedUser;
 
 
         var json = '{'
-                    + '"from" : "Ivan",'
+                    + '"from" : "' + fromUser + '" ,'
                     + '"to" :  "' + toUser + '" ,'
                     + '"text" : "' + message.value + '"'
                     + '}'
+
+        window.alert(json);
 
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
@@ -60,6 +71,14 @@
 <!-- Get all messages for selected user and populate chatText element with them-->
 
     function getMessagesForUser(user){
+
+        var chat = document.getElementById("chatText");
+        var chatLength = chat.options.length;
+
+        for (i = 0; i < chatLength; i++) {
+              chat.options[i] = null;
+        }
+
         //window.alert("getMessagesForUser");
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
@@ -78,12 +97,12 @@
             //window.alert(json);
 
             var chat = document.getElementById("chatText");
-            var chatLength = chat.options.length;
+            //var chatLength = chat.options.length;
 
 
-            for (i = 0; i < chatLength; i++) {
-              chat.options[i] = null;
-            }
+            //for (i = 0; i < chatLength; i++) {
+            //  chat.options[i] = null;
+            //}
 
             for(var i = 0; i<json.length; i++){
                 var object = json[i];
@@ -95,20 +114,38 @@
 
 <body>
 <!--<form>-->
+<br>
+<table>
+    <tr>
+        <td width="20%"></td>
+        <td width="20%" id="loggedUser"></td>
+        <td></td>
+    </tr>
+</table>
+<br>
 <table>
     <tr>
         <td width="10%"></td>
         <td>
-            <select id="userList" size="3" style="width: 150px;height: 300px" onchange="changeUser()">
+            <font style="color:red;font-size: small">Chat rooms</font><br>
+            <select id="chatList" size="3" style="width: 150px;height: 80px" onchange="changeUser()">
                 <option style="background-color: darkslateblue;color: cornsilk">Main chat</option>
-                <option><hr></option>
+                <option style="color: green">room 1</option>
+            </select>
+            <div style="height: 10px"></div>
+            <font style="color:red;font-size: small">Users</font>
+            <br>
+
+            <select id="userList" size="3" style="width: 150px;height: 180px" onchange="changeUser()">
                 <option style="color: green">Ivan</option>
                 <option style="color: green">Petro</option>
                 <option style="color: green">Mykola</option>
+                <option style="color: green">Yegor</option>
                 <option style="color: red">Stanislav</option>
             </select>
         </td>
         <td>
+
             <select id="chatText" size="100" style="width: 1000px;height: 200px">
                 <!--
                 <option style="font-family: monospace;font-size: medium">Ivan&nbsp;&nbsp;&nbsp;(12:02):&nbsp;&nbsp;&nbsp;Hey guys, let's play football</option>

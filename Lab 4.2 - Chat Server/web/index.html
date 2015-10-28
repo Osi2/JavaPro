@@ -7,8 +7,9 @@
 
     <script>
         function authenticate(){
-            var nickName = document.getElementById("nickName");
-            getResponse(nickName.value);
+            var nickName = document.getElementById("nickName").value;
+            localStorage.loggedUser = nickName;
+            getResponse(nickName);
         }
         function getResponse(user) {
             //window.alert(user);
@@ -25,7 +26,6 @@
         }
 
         function callback(response){
-            //window.alert(response);
             var pass = document.getElementById("password");
             if (response == pass.value){
                 window.location = "chat.html";

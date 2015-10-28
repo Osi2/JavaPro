@@ -27,7 +27,10 @@ public class AddMessageServlet extends HttpServlet {
 			System.out.println("to: " + msg.getTo());
 			System.out.println("from: " + msg.getFrom());
 			System.out.println("text: " + msg.getText());
-			UserList.getUserByName(msg.getTo()).addUserMessage(msg);
+
+			User u = UserList.getUserByName(msg.getTo());
+			System.out.println("add message for user: " + u.getFirstName());
+			u.addUserMessage(msg);
 			//msgList.add(msg);
 		}
 		else {

@@ -29,7 +29,10 @@ public class GetMessageListServlet extends HttpServlet {
 		String user = req.getParameter("getUserChat");
 		System.out.println("get chat messages for user: " + user);
 
-		msgList = UserList.getUserByName(user).getUserMessages();
+		User u = UserList.getUserByName(user);
+		System.out.println("found user:" + u.getFirstName());
+
+		msgList = u.getUserMessages();
 		System.out.println("Number of messages by user " + user + ": " + String.valueOf(msgList.getCount()));
 		String json = msgList.toJSON(0);
 

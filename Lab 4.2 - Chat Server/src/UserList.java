@@ -20,7 +20,9 @@ public class UserList {
     static {
         userList.add(new User("Main chat","Main chat","Main","11111"));
         userList.add(new User("Ivan","Ivan","Ivanov","11111"));
-        userList.add(new User("Petro","Petro","Ivanov","11111"));
+        userList.add(new User("Petro","Petro","Petrov","11111"));
+        userList.add(new User("Mykola","Mykola","Nikolaev","11111"));
+        userList.add(new User("Yegor","Yegor","Osipov","11111"));
     }
 
     public static List<User> getUserList(){return userList;}
