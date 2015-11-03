@@ -15,7 +15,14 @@ public class ChatRoomList {
         return null;
     }
 
+    static {
+        chatRooms.add(new ChatRoom("Public","11111",null));
+        chatRooms.add(new ChatRoom("room 1","11111",null));
+    }
+
     public static void addRoom(ChatRoom room){
         chatRooms.add(room);
     }
+
+    public static List<ChatRoom> getChatRooms() {return  chatRooms;}
 }

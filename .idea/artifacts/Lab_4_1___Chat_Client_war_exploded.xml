@@ -5,9 +5,13 @@
       <element id="javaee-facet-resources" facet="Lab 4.1 - Chat Server/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="Lab 4.1 - Chat Server" />
+          <element id="module-output" name="Lab 4.2 - Chat Server" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="gson-2.2.4" />
         </element>
       </element>
+      <element id="library" level="project" name="gson-2.2.4" />
     </root>
   </artifact>
 </component>

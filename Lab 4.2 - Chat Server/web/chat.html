@@ -12,37 +12,43 @@
         //window.alert(name);
         document.getElementById("loggedUser").innerHTML = "You logged as: <font color='blue'>" + name + "</font>";
 
+        var interval = setInterval(repeat, 10000);
+
+    }
+
+    function repeat(){
+        getChatRooms();
+        getUsers();
     }
     
     function changeChatRoom(){
 
         clearSelectedUsers();
 
-        //window.alert("changeUser");
-        //chatRoom = getSelectedChatRoom();
-        //window.alert(user);
-        //getMessagesForChat(chatRoom);
+        chatRoom = getSelectedChatRoom();
+
+        getMessagesForChatRoom(chatRoom);
     }
 
-    function getMessagesForChat(chatRoom){}
+    function getMessagesForChatRoom(chatRoom){}
 
     function getSelectedChatRoom(){
 
         clearSelectedChatRoomList();
 
-        //var select = document.getElementById("userList");
-        //var listLength = select.options.length;
+        var chatRoom = document.getElementById("chatRoomList");
+        var chatRoomLength = chatRoom.options.length;
 
-        //var user;
+        var chatRoom;
 
-        //    for(var i = 0; i < listLength; i++){
-        //        if(select.options[i].selected){
-        //           user = select.options[i].value;
-        //           break;
-        //        }
-        //    }
+            for(var i = 0; i < chatRoomLength; i++){
+                if(chatRoom.options[i].selected){
+                   user = chatRoom.options[i].value;
+                   break;
+                }
+            }
 
-        //    return user;
+            return chatRoom;
     }
 
     function changeUser(){
@@ -100,6 +106,7 @@
 
         message.value = "";
         changeUser();
+        getMessagesForUser(toUser);
     }
 
 <!-- Get all messages for selected user and populate chatText element with them-->
@@ -113,12 +120,11 @@
               chat.options[i] = null;
         }
 
-        //window.alert("getMessagesForUser");
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4) {
                 var data = xhr.responseText;
-                callback2(data);
+                callbackMsg(data);
             }
         }
         xhr.open('POST', 'getMsg', true);
@@ -126,24 +132,84 @@
         xhr.send("getUserChat=" + user);
     }
 
-        function callback2(response){
-            var json = JSON.parse(response);
-            //window.alert(json);
+    function callbackMsg(response){
 
-            var chat = document.getElementById("chatText");
-            //var chatLength = chat.options.length;
+        var json = JSON.parse(response);
+        var chat = document.getElementById("chatText");
 
 
-            //for (i = 0; i < chatLength; i++) {
-            //  chat.options[i] = null;
-            //}
+        for(var i = 0; i<json.length; i++){
+            var object = json[i];
+            chat.options[i] = new Option(object.from + "  [" + object.date + "]:     " + object.text);
+        }
+    }
 
-            for(var i = 0; i<json.length; i++){
-                var object = json[i];
-                //window.alert(object.text);
-                chat.options[i] = new Option(object.from + "  [" + object.date + "]:     " + object.text);
+    function getChatRooms(){
+
+        var chatRooms = document.getElementById("chatRoomList");
+        var chatRoomLength = chatRooms.options.length;
+
+        for (i = 0; i < chatRoomLength; i++) {
+            chatRooms.options[i] = null;
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                var data = xhr.responseText;
+                callbackChatRooms(data);
             }
         }
+        xhr.open('POST', 'getChatRoom', true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(null);
+    }
+
+    function callbackChatRooms(response){
+        var json = JSON.parse(response);
+
+        var chatRooms = document.getElementById("chatRoomList");
+
+        for(var i = 0; i<json.length; i++){
+            var object = json[i];
+            chatRooms.options[i] = new Option(object.name);
+        }
+    }
+
+    function getUsers(){
+
+        //window.alert("getMessagesForUser");
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                var data = xhr.responseText;
+                callbackUsers(data);
+            }
+        }
+        xhr.open('POST', 'getUser', true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(null);
+    }
+
+    function callbackUsers(response){
+        var json = JSON.parse(response);
+        var user = localStorage.loggedUser;
+        var users = document.getElementById("userList");
+        var usersLength = users.options.length;
+
+        for (var i = 0; i < json.length; i++) {
+            var object = json[i];
+
+            for (var j = 0; j < usersLength; j ++) {
+                if (users.indexOf(object) <= 0 && user != object.nickName){
+                    users.options[i] = new Option(object.nickName);
+                }
+            }
+
+
+        }
+
+    }
 
     function clearSelectedChatRoomList(){
         var rooms = document.getElementById("chatRoomList");
@@ -195,8 +261,9 @@
                 <option style="color: red">Stanislav</option>
             </select>
         </td>
+        <td width="2%"></td>
         <td>
-
+            <font style="text-align: left;color:red;font-size: small">Text</font><br>
             <select id="chatText" size="100" style="width: 1000px;height: 200px">
                 <!--
                 <option style="font-family: monospace;font-size: medium">Ivan&nbsp;&nbsp;&nbsp;(12:02):&nbsp;&nbsp;&nbsp;Hey guys, let's play football</option>
@@ -207,7 +274,7 @@
             <textarea style="height: 100px;width: 995px" id="myMessage"></textarea>
         </td>
     </tr>
-    <tr><td></td><td></td><td><input type="submit" value="Submit text" onclick="sendMessage()"></td></tr>
+    <tr><td></td><td></td></td><td></td><td><input type="submit" value="Submit text" onclick="sendMessage()"></td></tr>
     </table>
 
 <!--</form>-->

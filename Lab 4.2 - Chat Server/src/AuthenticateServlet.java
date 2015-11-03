@@ -19,7 +19,7 @@ public class AuthenticateServlet  extends HttpServlet {
         System.out.println("password: " + pass);
 
         resp.setContentType("text/plain");
-        resp.setCharacterEncoding("UTF-8");
+        //resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(pass);
     }
 
