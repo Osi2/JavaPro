@@ -60,7 +60,7 @@ public class Main {
         // #3
         System.out.println("Test #3:");
 
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/spring-config.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/WEB-INF/spring-config.xml");
 
         notificationService = (NotificationService)applicationContext.getBean("notificationService");
         notificationService.notifyClientsByEmail("Happy new year!");

@@ -15,7 +15,7 @@ public class AppConfig {
     public static final String DB_DRIVER = "com.mysql.jdbc.Driver";
     public static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/mydb";
     public static final String DB_USER = "root";
-    public static final String DB_PASSWORD = "password";
+    public static final String DB_PASSWORD = "root";
 
     @Bean
     public EntityManager entityManager() {
