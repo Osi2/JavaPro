@@ -7,7 +7,7 @@ import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 @Configuration
-@ComponentScan("ua.kiev.prog")
+@ComponentScan("")
 @EnableWebMvc
 public class AppConfig {
     @Bean
